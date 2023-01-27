@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+
+      #result {
+        margin-top: 20px;
+      }
+      label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="input" value="" />
+    <fieldset id="result">
+      <label>Result</label>
+      <div id="output"></div>
+    </fieldset>
+
+    <script>
+      function convert(str) {
+        if (str != str.toUpperCase()) {
+          str = str
+            .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+            .replace(/([A-Z])([A-Z])(?=[a-z])/g, "$1-$2")
+            .replace(/-./g, (match) => match[1].toUpperCase())
+            .toLowerCase();
+        }
+        return str;
+      }
+
+      function vak() {
+        let input = document.querySelector("#input");
+        let output = document.querySelector("#output");
+
+        const translate = () => {
+          let text = input.value;
+          output.textContent = convert(text);
+        };
+        input.addEventListener("keyup", function (e) {
+          translate();
+        });
+        translate();
+      }
+      vak();
+    </script>
+  </body>
+</html>
